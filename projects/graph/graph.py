@@ -96,7 +96,25 @@ class Graph:
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        pass  # TODO
+        queue = [ [1] ]
+        visited = set()
+
+        while len(queue) > 0:
+            current_path = queue.pop(0)
+            current_vertex = current_path[-1]
+
+            if current_vertex not in visited:
+                visited.add(current_vertex)
+
+                if current_vertex == destination_vertex:
+                    return current_path
+
+                neighbors = self.get_neighbors(current_vertex)
+                for neighbor in neighbors:
+                    current_path_copy = list(current_path)
+                    current_path_copy.append(neighbor)
+                    queue.append(current_path_copy)
+        return None
 
     def dfs(self, starting_vertex, destination_vertex):
         """
@@ -173,11 +191,12 @@ if __name__ == '__main__':
     graph.dft(1)
     graph.dft_recursive(1)
 
-    # '''
-    # Valid BFS path:
-    #     [1, 2, 4, 6]
-    # '''
-    # print(graph.bfs(1, 6))
+    '''
+    Valid BFS path:
+        [1, 2, 4, 6]
+    '''
+    print('Testing BFS')
+    print(graph.bfs(1, 6))
 
     # '''
     # Valid DFS paths:
