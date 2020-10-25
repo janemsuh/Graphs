@@ -78,7 +78,17 @@ class Graph:
 
         This should be done using recursion.
         """
-        pass  # TODO
+        visited = set()
+
+        def dft_visit(current_vertex):
+            print(current_vertex)
+            visited.add(current_vertex)
+            neighbors = self.get_neighbors(current_vertex)
+            for neighbor in neighbors:
+                if neighbor not in visited:
+                    dft_visit(neighbor)
+        
+        dft_visit(starting_vertex)
 
     def bfs(self, starting_vertex, destination_vertex):
         """
