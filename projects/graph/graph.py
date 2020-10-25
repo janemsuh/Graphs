@@ -28,14 +28,29 @@ class Graph:
         """
         Get all neighbors (edges) of a vertex.
         """
-        pass  # TODO
+        if vertex_id in self.vertices:
+            return self.vertices[vertex_id]
+        else:
+            return None
 
     def bft(self, starting_vertex):
         """
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        queue = []
+        queue.append(starting_vertex)
+        visited = set()
+
+        while len(queue) > 0:
+            current_vertex = queue.pop(0)
+
+            if current_vertex not in visited:
+                print(current_vertex)
+                visited.add(current_vertex)
+                neighbors = self.get_neighbors(current_vertex)
+                for neighbor in neighbors:
+                    queue.append(neighbor)
 
     def dft(self, starting_vertex):
         """
@@ -107,22 +122,22 @@ if __name__ == '__main__':
     print(graph.vertices)
     graph.add_edge('0', '4') # No '4' vertex, should raise an Exception!
 
-    # '''
-    # Valid BFT paths:
-    #     1, 2, 3, 4, 5, 6, 7
-    #     1, 2, 3, 4, 5, 7, 6
-    #     1, 2, 3, 4, 6, 7, 5
-    #     1, 2, 3, 4, 6, 5, 7
-    #     1, 2, 3, 4, 7, 6, 5
-    #     1, 2, 3, 4, 7, 5, 6
-    #     1, 2, 4, 3, 5, 6, 7
-    #     1, 2, 4, 3, 5, 7, 6
-    #     1, 2, 4, 3, 6, 7, 5
-    #     1, 2, 4, 3, 6, 5, 7
-    #     1, 2, 4, 3, 7, 6, 5
-    #     1, 2, 4, 3, 7, 5, 6
-    # '''
-    # graph.bft(1)
+    '''
+    Valid BFT paths:
+        1, 2, 3, 4, 5, 6, 7
+        1, 2, 3, 4, 5, 7, 6
+        1, 2, 3, 4, 6, 7, 5
+        1, 2, 3, 4, 6, 5, 7
+        1, 2, 3, 4, 7, 6, 5
+        1, 2, 3, 4, 7, 5, 6
+        1, 2, 4, 3, 5, 6, 7
+        1, 2, 4, 3, 5, 7, 6
+        1, 2, 4, 3, 6, 7, 5
+        1, 2, 4, 3, 6, 5, 7
+        1, 2, 4, 3, 7, 6, 5
+        1, 2, 4, 3, 7, 5, 6
+    '''
+    graph.bft(1)
 
     # '''
     # Valid DFT paths:
